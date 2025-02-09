@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="img\portfolio\Portfolio-upper-image.svg" type="image/x-icon">
+<link rel="stylesheet" href="./css/styles.css">
+
+   
+  <title>Sumit | Portfolio</title>
+     
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .contact-form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+    .contact-form h2 {
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .form-group textarea {
+      resize: none;
+      height: 100px;
+    }
+    .btn {
+      font-family: "Kaushan Script", cursive;
+      background-color: #a800a8;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 16px;
+    }
+    .btn:hover {
+      box-shadow:  0 5px 15px rgba(0, 0, 0, 0.3);
+      color: #ff5fa4;
+      background-color: white;
+      text-transform: capitalize;
+      font-weight: 500;
+      transition: all 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-form">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Your Name" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="phone" placeholder="Your Phone Number" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="subject" placeholder="Subject" required>
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Your Message" required></textarea>
+      </div>
+      <button type="submit" class="btn">Submit</button>     
+    </form>
+  </div>
+  <script src="config.js"></script>
+  <script>
+    // Initialize EmailJS
+    emailjs.init(config.PUBLIC_KEY); // Replace with your EmailJS public key
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+
+      // Prepare form data
+      const formData = new FormData(form);
+
+      // Send email using EmailJS
+      emailjs.sendForm(config.SERVICE_ID, config.TEMPLATE_ID, form)
+        .then(() => {
+          alert('Email sent successfully! , Wait for a Moment ');
+          form.reset();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert('Failed to send email. Please try again.');
+        });
+    });
+  </script>
+</body>
+</html>
+
+
